@@ -1,0 +1,6 @@
+Menu="Buttons"
+Name="CPU Freq Inject"
+---
+<script>
+document.addEventListener('DOMContentLoaded',function(){setInterval(function(){fetch('/plugins/cpufreq-inject/cpufreq-data.php').then(function(r){return r.json()}).then(function(d){var avg=(d.cpu_mhz.reduce(function(a,b){return a+b},0)/d.cpu_mhz.length/1000).toFixed(2);var el=document.getElementById('cpufreq-ghz');if(el){el.textContent=' (current: '+avg+' GHz)'}else{var icon=document.querySelector('i.icon-cpu');if(icon){var sec=icon.parentElement.querySelector('div.section');if(sec&&!sec.querySelector('#cpufreq-ghz')){var s=document.createElement('span');s.id='cpufreq-ghz';s.style.cssText='color:#999;font-size:12px';s.textContent=' (current: '+avg+' GHz)';sec.appendChild(s)}}}}).catch(function(){})},1000)});
+</script>
